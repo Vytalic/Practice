@@ -8,6 +8,10 @@
 # Bank Account
 # deposit - withdraw - check balance
 
+from datetime import date
+from datetime import datetime
+
+
 class Bank():
     def __init__(self, owner, acct_number, pin, balance, interest_rate):
         self.owner = owner
@@ -64,6 +68,21 @@ class Bank():
             print(f"-Withdrawal: {withdraw_x}                        ")
             print(f"-New Balance: {self.balance}                     ")
             print("----------------------------------------\n\n")
+            today = date.today()
+            now = datetime.now()
+            with open('transactions.txt', 'a') as f:
+                date2 = today.strftime("%B %d, %Y")
+                current_time = now.strftime("%H:%M:%S")
+                f.write("\n\n----------------------------------------")
+                f.write("\n---------------Receipt------------------")
+                f.write("\n----------------------------------------")
+                f.write(f"\n-Owner: {self.owner}                      ")
+                f.write(f"\n-Account Number: {self.acct_num}                ")
+                f.write("\n-                                      ")
+                f.write(f"\n-Previous Balance: {previous_bal}                ")
+                f.write(f"\n-Withdrawal: {withdraw_x}                        ")
+                f.write(f"\n-New Balance: {self.balance}                     ")
+                f.write("\n----------------------------------------\n")
         else:
             self.wrong_pin()
 
@@ -84,9 +103,34 @@ class Bank():
             print(f"-Previous Balance: {previous_bal}                ")
             print(f"-Deposit: {deposit_x}                        ")
             print(f"-New Balance: {self.balance}                     ")
-            print("----------------------------------------\n\n")
+            print("----------------------------------------\n")
+            today = date.today()
+            now = datetime.now()
+            with open('transactions.txt', 'a') as f:
+                date2 = today.strftime("%B %d, %Y")
+                current_time = now.strftime("%H:%M:%S")
+                f.write("\n\n/---------------------------------------------\\")
+                f.write("\n|         ")
+                f.write(date2)
+                f.write("     ")
+                f.write(current_time)
+                f.write("         |")
+                f.write("\n\---------------------------------------------/")
+                f.write("\n\n----------------------------------------")
+                f.write("\n---------------Receipt------------------")
+                f.write("\n----------------------------------------")
+                f.write(f"\n-Owner: {self.owner}                      ")
+                f.write(f"\n-Account Number: {self.acct_num}                ")
+                f.write("\n-                                      ")
+                f.write(f"\n-Previous Balance: {previous_bal}                ")
+                f.write(f"\n-Deposit: {deposit_x}                        ")
+                f.write(f"\n-New Balance: {self.balance}                     ")
+                f.write("\n----------------------------------------\n\n")
+            
         else:
             self.wrong_pin()
+
+
 
 acct1 = Bank("Ben Clark", 222333, 7777, 1000, 0.025)
 done = False
@@ -109,6 +153,8 @@ while done == False:
         acct1.deposit() 
     elif user_choice == 4:
         done = True
+
+
 
 
 
